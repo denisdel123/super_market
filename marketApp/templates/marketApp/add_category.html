@@ -4,6 +4,7 @@
 <div class="container">
     <main>
         <form method="post">
+            {% csrf_token %}
 
             <div class="row g-5">
 
@@ -13,15 +14,16 @@
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="name" class="form-label">Наименование категории</label>
-                                <input type="text" class="form-control" id="name" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="" value=""
+                                       required>
                             </div>
 
                             <hr class="my-4">
 
                             <div class="col-sm-6">
                                 <label for="description" class="form-label">Описание</label>
-                                <input type="text" class="form-control" id="description" placeholder="" value=""
-                                       required>
+                                <input type="text" class="form-control" id="description" name="description"
+                                       placeholder="" value="">
                             </div>
 
                         </div>
@@ -30,7 +32,7 @@
 
                         <div class="col-md-7">
                             <label for="photo" class="form-label">Изображение товара</label>
-                            <input type="file" class="form-control" id="photo" accept="image/*" required>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
                         </div>
 
                         <hr class="my-4">
@@ -41,5 +43,23 @@
             </div>
         </form>
     </main>
+</div>
+
+<div class="pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a href="?page=1">&laquo; Первая</a>
+                <a href="?page={{ products.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ products.number }} из {{ products.paginator.num_pages }}.
+            </span>
+
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">Следующая</a>
+                <a href="?page={{ products.paginator.num_pages }}">Последняя &raquo;</a>
+            {% endif %}
+        </span>
 </div>
 {% endblock %}

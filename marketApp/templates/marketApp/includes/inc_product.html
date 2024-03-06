@@ -1,0 +1,31 @@
+{% load my_tags %}
+<div class="container">
+    <div class="row text-center">
+        {% for object in page_obj %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object.name|title }}</h4>
+                    <div class="image-container">
+                        <img src="{{ object.photo|mymedia }}" width="200" height="200">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">$ {{object.price}}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ object.}}</li>
+                        {% if object.in_stock %}
+                        <li>В наличии</li>
+                        {% else %}
+                        <li>Нет в наличии</li>
+                        {% endif %}
+                        <li>Страна производства: {{ object.country }}</li>
+                    </ul>
+                    <li>{{ object.descriptions|truncatechars:50 }}</li>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">В корзину</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

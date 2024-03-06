@@ -3,24 +3,27 @@
 {% block content %}
 <div class="container">
     <main>
-        <div class="row g-5">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row g-5">
 
-            <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Введите данные товара</h4>
-                <form class="needs-validation" novalidate>
-                    <form method="post">
-                        {% csrf_token %}
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Введите данные товара</h4>
+                    <form class="needs-validation" novalidate>
+
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="name" class="form-label">Наименование товара</label>
-                                <input type="text" class="form-control" id="name" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="" value=""
+                                       required>
                             </div>
 
                             <hr class="my-4">
 
                             <div class="col-sm-6">
                                 <label for="description" class="form-label">Описание</label>
-                                <input type="text" class="form-control" id="description" placeholder="" value=""
+                                <input type="text" class="form-control" id="description" name="description"
+                                       placeholder="" value=""
                                        required>
                             </div>
 
@@ -28,21 +31,23 @@
 
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Страна производства</label>
-                                <input type="text" class="form-control" id="country" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="country" name="country" placeholder=""
+                                       value="" required>
                             </div>
 
                             <hr class="my-4">
 
                             <div class="col-sm-6">
                                 <label for="price" class="form-label">Стоимость</label>
-                                <input type="text" class="form-control" id="price" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="" value=""
+                                       required>
                             </div>
 
                             <hr class="my-4">
 
                             <div class="col-md-5">
                                 <label for="category" class="form-label">Категория Товара</label>
-                                <select class="form-select" id="category">
+                                <select class="form-select" id="category" name="category">
                                     <option value="">Choose...</option>
                                     {% for category in categories%}
                                     <option value="{{ category.id }}">{{ category.name }}</option>
@@ -55,13 +60,13 @@
 
                         <div class="col-md-7">
                             <label for="photo" class="form-label">Изображение товара</label>
-                            <input type="file" class="form-control" id="photo" accept="image/*">
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
                         </div>
 
                         <hr class="my-4">
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="in_stock">
+                            <input type="checkbox" class="form-check-input" id="in_stock" name="in_stock">
                             <label class="form-check-label" for="in_stock">В наличии</label>
                         </div>
 
@@ -70,9 +75,10 @@
 
                         <button class="w-100 btn btn-primary btn-lg" type="submit">Добавить</button>
                     </form>
-                </form>
+
+                </div>
             </div>
-        </div>
+        </form>
     </main>
 </div>
 {% endblock %}
