@@ -1,0 +1,47 @@
+{% extends 'marketApp/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="image-container">
+    <img src="{{ page_obj.photo|mymedia }}" width="200" height="200">
+</div>
+<div class="col-lg-9 col-md-6 col-sm-12">
+    <div class="card mb-4 box-shadow">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <td class="w-25">Наименование</td>
+                    <td>{{ page_obj.name }}</td>
+                </tr>
+                <tr>
+                    <td class="w-25">Страна</td>
+                    <td>{{ page_obj.country }}</td>
+                </tr>
+
+                <tr>
+                    <td class="w-25">наличие</td>
+                    {% if page_obj.in_stock == True%}
+
+                    <td>В наличии</td>
+                    {% else %}
+                    <td>Нет наличии</td>
+                    {% endif %}
+
+                </tr>
+
+                <tr>
+                    <td class="w-25">Описание</td>
+                    <td>{{ page_obj.description }}</td>
+                </tr>
+
+                 <tr>
+                    <td class="w-25">Цена</td>
+                    <td>$ {{ page_obj.price }}</td>
+                </tr>
+            </table>
+            <a href="{% url 'marketApp:main' %}" class="btn btn-lg btn-block btn-outline-primary">На главную</a>
+            <a href="#" class="btn btn-lg btn-block btn-outline-primary">В корзину</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

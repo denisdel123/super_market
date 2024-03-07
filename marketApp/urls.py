@@ -1,6 +1,6 @@
 from django.urls import path
 
-from marketApp.views import main, catalog, contacts, product, add_product, add_category
+from marketApp.views import main, catalog, contacts, product, add_product, add_category, product_view
 from marketApp.apps import MarketappConfig
 
 app_name = MarketappConfig.name
@@ -12,5 +12,6 @@ urlpatterns = [
     path('<int:pk>/product/', product, name='product'),
     path('addProduct', add_product, name='addProduct'),
     path('addCategory', add_category, name='addCategory'),
+    path('<int:pk>/productView', product_view, name='productView'),
 
 ]

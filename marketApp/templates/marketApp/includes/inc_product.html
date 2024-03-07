@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">$ {{object.price}}</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>{{ object.}}</li>
+
                         {% if object.in_stock %}
                         <li>В наличии</li>
                         {% else %}
@@ -21,7 +21,8 @@
                         {% endif %}
                         <li>Страна производства: {{ object.country }}</li>
                     </ul>
-                    <li>{{ object.descriptions|truncatechars:50 }}</li>
+                    <li>{{ object.description|truncatechars:50 }}</li>
+                    <a href="{% url 'marketApp:productView' object.pk%}" class="btn btn-lg btn-block btn-outline-primary">Описание</a>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">В корзину</button>
                 </div>
             </div>

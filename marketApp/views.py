@@ -5,12 +5,23 @@ from marketApp.models import Product, Category
 
 
 def main(request):
-    return render(request, 'marketApp/main.html')
+    object_list = Product.objects.all()
+    paginator = Paginator(object_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'title': 'Главная',
+        'page_obj': page_obj,
+
+    }
+
+    return render(request, 'marketApp/product.html', context)
 
 
 def catalog(request):
     object_list = Category.objects.all()
-    paginator = Paginator(object_list, 1)
+    paginator = Paginator(object_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -32,7 +43,7 @@ def contacts(request):
 
 def product(request, pk):
     object_list = Product.objects.filter(category_id=pk)
-    paginator = Paginator(object_list, 1)
+    paginator = Paginator(object_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -90,3 +101,12 @@ def add_category(request):
         category.save()
 
     return render(request, 'marketApp/add_category.html')
+
+
+def product_view(request, pk):
+    object_list = Product.objects.get(pk=pk)
+    context = {
+        'page_obj': object_list,
+        'title': 'Описание продукта',
+    }
+    return render(request, 'marketApp/product_view.html', context)
